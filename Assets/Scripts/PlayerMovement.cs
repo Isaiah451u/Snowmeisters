@@ -27,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
         jumpInput = Input.GetAxis("Jump");
         horizontalInput = Input.GetAxis("Horizontal");
         var halfHeight = transform.GetComponent<BoxCollider2D>().bounds.extents.y;
-        groundCheck = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y - halfHeight - 0.04f), Vector2.down, 0.025f);
+        groundCheck = Physics2D.Raycast(transform.position, -Vector3.up, halfHeight + 0.1f);
     }
 
     void FixedUpdate()
