@@ -8,12 +8,15 @@ public class PlayerMovement : MonoBehaviour
     public float jumpSpeed = 3f;
     public bool groundCheck;
     public bool isSwinging;
+    public LayerMask groundLayer;
+    public Transform groundCheckObject;
     private SpriteRenderer playerSprite;
     private Rigidbody2D rBody;
     private bool isJumping;
     private Animator animator;
     private float jumpInput;
     private float horizontalInput;
+    
 
     void Awake()
     {
@@ -27,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
         jumpInput = Input.GetAxis("Jump");
         horizontalInput = Input.GetAxis("Horizontal");
         var halfHeight = transform.GetComponent<BoxCollider2D>().bounds.extents.y;
-        groundCheck = Physics2D.Raycast(transform.position, -Vector3.up, halfHeight + 0.1f);
+        groundCheck = Physics2D.OverlapCircle(groundCheckObject.position, 0.15f, groundLayer);
     }
 
     void FixedUpdate()
@@ -37,16 +40,14 @@ public class PlayerMovement : MonoBehaviour
             //animator.SetFloat("Speed", Mathf.Abs(horizontalInput));
             playerSprite.flipX = horizontalInput < 0f;
 
-            if (groundCheck)
-            {
-                var groundForce = speed * 2f;
-                rBody.AddForce(new Vector2((horizontalInput * groundForce - rBody.velocity.x) * groundForce, 0));
-                rBody.velocity = new Vector2(Mathf.Clamp(rBody.velocity.x, -10, 10), rBody.velocity.y);
-            }
+            var groundForce = speed * 2f;
+            rBody.AddForce(new Vector2((horizontalInput * groundForce - rBody.velocity.x) * groundForce, 0));
+            rBody.velocity = new Vector2(Mathf.Clamp(rBody.velocity.x, -10, 10), rBody.velocity.y);
         }
         else
         {
             //animator.SetFloat("Speed", 0f);
+            rBody.velocity = new Vector2(0, rBody.velocity.y);
         }
 
         if (!groundCheck) return;
