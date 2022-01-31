@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95e66c6366d904e98bc83428217d4fd7, type: 3}
+  m_Name: ChangeSceneByName
+  m_EditorClassIdentifier: 
+  _data:
+    _json: '{"graph":{"variables":{"collection":{"$content":[],"$version":"A"},"$version":"A"},"controlInputDefinitions":[{"key":"FlowIn","label":null,"summary":null,"hideLabel":true}],"controlOutputDefinitions":[{"key":"FlowOut","label":null,"summary":null,"hideLabel":true}],"valueInputDefinitions":[{"hasDefaultValue":true,"defaultValue":{"$content":"Start
+      Menu","$type":"System.String"},"_type":"System.String","key":"SceneName","label":null,"summary":null,"hideLabel":false}],"valueOutputDefinitions":[],"title":null,"summary":null,"pan":{"x":0.0,"y":-75.0},"zoom":1.0,"elements":[{"defaultValues":{},"position":{"x":-483.0,"y":-255.0},"guid":"1d4f068b-7e47-4b4f-bab9-06daadf02e3d","$version":"A","$type":"Unity.VisualScripting.GraphInput","$id":"12"},{"defaultValues":{},"position":{"x":-119.0,"y":-103.0},"guid":"5afa4c80-774b-4674-bfac-354b149ad7de","$version":"A","$type":"Unity.VisualScripting.GraphOutput","$id":"14"},{"chainable":false,"member":{"name":"LoadScene","parameterTypes":["System.String"],"targetType":"UnityEngine.SceneManagement.SceneManager","targetTypeName":"UnityEngine.SceneManagement.SceneManager","$version":"A"},"defaultValues":{"%sceneName":{"$content":"","$type":"System.String"}},"position":{"x":-300.0,"y":-210.0},"guid":"0ee92586-115e-4103-bdf1-5929ba7bbb37","$version":"A","$type":"Unity.VisualScripting.InvokeMember","$id":"16"},{"sourceUnit":{"$ref":"12"},"sourceKey":"FlowIn","destinationUnit":{"$ref":"16"},"destinationKey":"enter","guid":"72b5b4e7-f17d-4c93-9f9e-08f471dc0dba","$type":"Unity.VisualScripting.ControlConnection"},{"sourceUnit":{"$ref":"16"},"sourceKey":"exit","destinationUnit":{"$ref":"14"},"destinationKey":"FlowOut","guid":"32338af5-5b1a-45ba-9e6a-d151dc8e750b","$type":"Unity.VisualScripting.ControlConnection"},{"sourceUnit":{"$ref":"12"},"sourceKey":"SceneName","destinationUnit":{"$ref":"16"},"destinationKey":"%sceneName","guid":"933d5b1a-76aa-421a-81a9-1af34f987f0f","$type":"Unity.VisualScripting.ValueConnection"}],"$version":"A"}}'
+    _objectReferences: []

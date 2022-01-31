@@ -8,4 +8,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/StartScene.unity
+    guid: 0c08a5234451952448bbafab1b672a1f
+  - enabled: 1
+    path: Assets/Scenes/GrappleScene.unity
+    guid: 8dc0a2bc1aab71948890d43ec072cbad
+  - enabled: 1
+    path: Assets/Scenes/LevelScene.unity
+    guid: e76fc198274ed214fbebf8b9fcdd01f0
   m_configObjects: {}
