@@ -5,6 +5,9 @@ using System.Linq;
 
 public class RopeSystem : MonoBehaviour
 {
+    public float climbSpeed = 3f;
+    private bool isColliding;
+
     public GameObject ropeHingeAnchor;
     public DistanceJoint2D ropeJoint;
     public Transform crosshair;
@@ -44,15 +47,21 @@ public class RopeSystem : MonoBehaviour
 
         if (!ropeAttached)
         {
+            playerMovement.isSwinging = false;
             SetCrosshairPosition(aimAngle); //When the rope isn't attatched, the crosshair is where the mouse is
         }
         else
         {
+            playerMovement.isSwinging = true;
+            playerMovement.ropeHook = ropePositions.Last();
+
             crosshairSprite.enabled = false; //When the rope is attatched, disable the croshair
         }
 
         HandleInput(aimDirection);
         UpdateRopePositions();
+        HandleRopeLength();
+
     }
 
     private void SetCrosshairPosition(float aimAngle)
@@ -102,7 +111,7 @@ public class RopeSystem : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Space)) //reset if space
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButton(1)) //reset if space
         {
             ResetRope();
         }
@@ -174,4 +183,27 @@ public class RopeSystem : MonoBehaviour
             }
         }
     }
+
+    private void HandleRopeLength()
+    {
+        // 1
+        if (Input.GetAxis("Vertical") >= 1f && ropeAttached && !isColliding)
+        {
+            ropeJoint.distance -= Time.deltaTime * climbSpeed;
+        }
+        else if (Input.GetAxis("Vertical") < 0f && ropeAttached)
+        {
+            ropeJoint.distance += Time.deltaTime * climbSpeed;
+        }
+    }
+    void OnTriggerStay2D(Collider2D colliderStay)
+    {
+        isColliding = true;
+    }
+
+    private void OnTriggerExit2D(Collider2D colliderOnExit)
+    {
+        isColliding = false;
+    }
+
 }
