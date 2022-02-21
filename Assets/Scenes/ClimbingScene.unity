@@ -1200,6 +1200,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d503d2071c7eb9b48965d8ebf3742792, type: 3}
+--- !u!1 &461168881 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2223299735936960833, guid: d503d2071c7eb9b48965d8ebf3742792, type: 3}
+  m_PrefabInstance: {fileID: 461168880}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &792314660
 GameObject:
   m_ObjectHideFlags: 0
@@ -2117,8 +2122,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _data:
-    _json: '{"declarations":{"collection":{"$content":[],"$version":"A"},"$version":"A"}}'
-    _objectReferences: []
+    _json: '{"declarations":{"collection":{"$content":[{"name":"PlayerObject","value":{"$content":0,"$type":"UnityEngine.Object"},"$version":"A"},{"name":"climbingX","value":{"$content":0.0,"$type":"System.Single"},"$version":"A"}],"$version":"A"},"$version":"A"}}'
+    _objectReferences:
+    - {fileID: 461168881}
 --- !u!4 &858573158
 Transform:
   m_ObjectHideFlags: 0
