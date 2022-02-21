@@ -24,7 +24,7 @@ public class PlayerMovement : MonoBehaviour
     {
         playerSprite = GetComponent<SpriteRenderer>();
         rBody = GetComponent<Rigidbody2D>();
-        //animator = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
     }
 
     void Update()
@@ -40,11 +40,10 @@ public class PlayerMovement : MonoBehaviour
     {
         if (horizontalInput < 0f || horizontalInput > 0f)
         {
-            //animator.SetFloat("Speed", Mathf.Abs(horizontalInput));
+            animator.SetFloat("Speed", Mathf.Abs(horizontalInput));
             playerSprite.flipX = horizontalInput < 0f;
             if (isSwinging)
             {
-                //animator.SetBool("IsSwinging", true);
 
                 // 1 - Get a normalized direction vector from the player to the hook point
                 var playerToHookDirection = (ropeHook - (Vector2)transform.position).normalized;
@@ -69,7 +68,6 @@ public class PlayerMovement : MonoBehaviour
             }
             else
             {
-                //animator.SetBool("IsSwinging", false);
                 if (horizontalInput < 0f || horizontalInput > 0f)
                 {
                     playerSprite.flipX = horizontalInput < 0f;
@@ -82,8 +80,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            //animator.SetBool("IsSwinging", false);
-            //animator.SetFloat("Speed", 0f);
+            animator.SetFloat("Speed", 0f);
         }
 
         if (!isSwinging)
@@ -94,6 +91,11 @@ public class PlayerMovement : MonoBehaviour
             if (isJumping)
             {
                 rBody.velocity = new Vector2(rBody.velocity.x, jumpSpeed);
+                animator.SetBool("isJumping", true);
+            }
+            else
+            {
+                animator.SetBool("isJumping", false);
             }
         }
     }
