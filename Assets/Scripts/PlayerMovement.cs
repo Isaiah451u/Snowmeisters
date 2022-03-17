@@ -34,6 +34,15 @@ public class PlayerMovement : MonoBehaviour
         var halfHeight = transform.GetComponent<BoxCollider2D>().bounds.extents.y;
         groundCheck = Physics2D.OverlapCircle(groundCheckObject.position, 0.15f, groundLayer);
 
+
+        if (isSwinging)
+        {
+            rBody.drag = .15f;
+        }
+        else if(isSwinging == false && groundCheck)
+        {
+            rBody.drag = 2.7f;
+        }
     }
 
     void FixedUpdate()

@@ -10,8 +10,6 @@ public class RopeSystem : MonoBehaviour
 
     public GameObject ropeHingeAnchor;
     public DistanceJoint2D ropeJoint;
-    public Transform crosshair;
-    public SpriteRenderer crosshairSprite;
     public PlayerMovement playerMovement;
     private bool ropeAttached;
     private Vector2 playerPosition;
@@ -48,14 +46,11 @@ public class RopeSystem : MonoBehaviour
         if (!ropeAttached)
         {
             playerMovement.isSwinging = false;
-            SetCrosshairPosition(aimAngle); //When the rope isn't attatched, the crosshair is where the mouse is
         }
         else
         {
             playerMovement.isSwinging = true;
             playerMovement.ropeHook = ropePositions.Last();
-
-            crosshairSprite.enabled = false; //When the rope is attatched, disable the croshair
         }
 
         HandleInput(aimDirection);
@@ -64,20 +59,6 @@ public class RopeSystem : MonoBehaviour
 
     }
 
-    private void SetCrosshairPosition(float aimAngle)
-    {
-        if (!crosshairSprite.enabled)
-        {
-            crosshairSprite.enabled = true;
-        }
-
-        //Locks the croshair position in a one-unit circle around the player
-        var x = transform.position.x + 1f * Mathf.Cos(aimAngle); 
-        var y = transform.position.y + 1f * Mathf.Sin(aimAngle);
-
-        var crossHairPosition = new Vector3(x, y, 0);
-        crosshair.transform.position = crossHairPosition; //Sets crosshair position 
-    }
 
     private void HandleInput(Vector2 aimDirection)
     {
@@ -186,8 +167,8 @@ public class RopeSystem : MonoBehaviour
 
     private void HandleRopeLength()
     {
-        // 1
-        if (Input.GetAxis("Vertical") >= 1f && ropeAttached && !isColliding)
+       
+        if (Input.GetAxis("Vertical") >= 1f && ropeAttached)
         {
             ropeJoint.distance -= Time.deltaTime * climbSpeed;
         }
