@@ -21,12 +21,18 @@ public class RopeSystem : MonoBehaviour
     private List<Vector2> ropePositions = new List<Vector2>();
     private bool distanceSet;
 
+    #region tristan visual variables :3
+    private GameObject grappleTrigger;
+
+    #endregion
     void Awake() //Sets the initial components
     {
         ropeJoint.enabled = false;
         playerPosition = transform.position;
         ropeHingeAnchorRb = ropeHingeAnchor.GetComponent<Rigidbody2D>();
         ropeHingeAnchorSprite = ropeHingeAnchor.GetComponent<SpriteRenderer>();
+
+        grappleTrigger = ropeHingeAnchor.gameObject.transform.GetChild(0).gameObject;
     }
 
     void Update()
@@ -56,6 +62,7 @@ public class RopeSystem : MonoBehaviour
         HandleInput(aimDirection);
         UpdateRopePositions();
         HandleRopeLength();
+        HandleGrappleVisuals();
 
     }
 
@@ -187,4 +194,15 @@ public class RopeSystem : MonoBehaviour
         isColliding = false;
     }
 
+    private void HandleGrappleVisuals()
+    {
+        if (ropeAttached)
+        {
+            grappleTrigger.SetActive(true);
+        }
+        else
+        {
+            grappleTrigger.SetActive(false);
+        }
+    }
 }
