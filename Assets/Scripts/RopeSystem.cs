@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using Unity.VisualScripting;
+
 
 public class RopeSystem : MonoBehaviour
 {
     public float climbSpeed = 3f;
-    private bool isColliding;
 
     public GameObject ropeHingeAnchor;
     public DistanceJoint2D ropeJoint;
@@ -20,6 +21,8 @@ public class RopeSystem : MonoBehaviour
     private float ropeMaxCastDistance = 20f;
     private List<Vector2> ropePositions = new List<Vector2>();
     private bool distanceSet;
+
+    public bool isClimbing;
 
     #region tristan visual variables :3
     private GameObject grappleTrigger;
@@ -37,6 +40,8 @@ public class RopeSystem : MonoBehaviour
 
     void Update()
     {
+        isClimbing = (bool)Variables.Saved.Get("Climbing");
+
         var worldMousePosition =
             Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0f)); //Gets the mouse current position and saves it to a variable
         var facingDirection = worldMousePosition - transform.position; //Gets the direction the mouse is in relation to the player
@@ -63,15 +68,22 @@ public class RopeSystem : MonoBehaviour
         UpdateRopePositions();
         HandleRopeLength();
         HandleGrappleVisuals();
-
+        
     }
 
 
     private void HandleInput(Vector2 aimDirection)
     {
+        
+
         if (Input.GetMouseButton(0)) //Checks if the left mouse button was pressed
         {
-     
+
+            if (isClimbing == true)
+                return;
+            if (playerMovement.rBody.velocity != new Vector2(0, 0))
+                return;
+
             if (ropeAttached) return; //if the rope is already attatched, break out of the code
             ropeRenderer.enabled = true;
 
@@ -83,7 +95,7 @@ public class RopeSystem : MonoBehaviour
                 if (!ropePositions.Contains(hit.point))
                 {
                     // Jump slightly to distance the player a little from the ground after grappling to something.
-                    transform.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, 30f), ForceMode2D.Impulse);
+                    transform.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, 3f), ForceMode2D.Impulse);
                     ropePositions.Add(hit.point);
                     ropeJoint.distance = Vector2.Distance(playerPosition, hit.point);
                     ropeJoint.enabled = true;
@@ -183,15 +195,6 @@ public class RopeSystem : MonoBehaviour
         {
             ropeJoint.distance += Time.deltaTime * climbSpeed;
         }
-    }
-    void OnTriggerStay2D(Collider2D colliderStay)
-    {
-        isColliding = true;
-    }
-
-    private void OnTriggerExit2D(Collider2D colliderOnExit)
-    {
-        isColliding = false;
     }
 
     private void HandleGrappleVisuals()
