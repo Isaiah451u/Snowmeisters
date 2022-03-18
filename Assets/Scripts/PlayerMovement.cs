@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask groundLayer;
     public Transform groundCheckObject;
     private SpriteRenderer playerSprite;
-    private Rigidbody2D rBody;
+    public Rigidbody2D rBody;
     private bool isJumping;
     private Animator animator;
     private float jumpInput;
