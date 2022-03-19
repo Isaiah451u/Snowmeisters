@@ -19,7 +19,8 @@ public class PlayerMovement : MonoBehaviour
     private float jumpInput;
     private float horizontalInput;
     public float jumpCounter;
-    
+    public float maxJumps;
+
 
     void Awake()
     {
@@ -40,7 +41,7 @@ public class PlayerMovement : MonoBehaviour
         {
             rBody.drag = .15f;
         }
-        else if(isSwinging == false && groundCheck)
+        else if (isSwinging == false && groundCheck)
         {
             rBody.drag = 2.7f;
         }
@@ -98,22 +99,30 @@ public class PlayerMovement : MonoBehaviour
 
         if (!isSwinging)
         {
-            if (!groundCheck && Input.GetKeyDown(KeyCode.Space))
-                jumpCounter += 1;
-            if (jumpCounter >= 2)
-                return;
 
-            isJumping = jumpInput > 0f;
-            if (isJumping)
+            if (jumpCounter > 0)
             {
-                rBody.velocity = new Vector2(rBody.velocity.x, jumpSpeed);
-                animator.SetBool("isJumping", true);
-            }
-            else
-            {
-                animator.SetBool("isJumping", false);
+                jumpCounter = jumpCounter - 1;
+
+                isJumping = jumpInput > 0f;
+                if (isJumping)
+                {
+                    rBody.velocity = new Vector2(rBody.velocity.x, jumpSpeed);
+                    animator.SetBool("isJumping", true);
+                }
+                else
+                {
+                    animator.SetBool("isJumping", false);
+                }
             }
         }
     }
 
+    void OnCollisionEnter2D(Collision2D collider)
+    {
+        if (collider.gameObject.layer == groundLayer)
+        {
+            jumpCounter = maxJumps;
+        }
+    }
 }
