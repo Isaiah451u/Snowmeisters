@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
     private Animator animator;
     private float jumpInput;
     private float horizontalInput;
+    public float jumpCounter;
     
 
     void Awake()
@@ -43,6 +44,9 @@ public class PlayerMovement : MonoBehaviour
         {
             rBody.drag = 2.7f;
         }
+
+        if (groundCheck)
+            jumpCounter = 0;
     }
 
     void FixedUpdate()
@@ -94,7 +98,10 @@ public class PlayerMovement : MonoBehaviour
 
         if (!isSwinging)
         {
-            if (!groundCheck) return;
+            if (!groundCheck && Input.GetKeyDown(KeyCode.Space))
+                jumpCounter += 1;
+            if (jumpCounter >= 2)
+                return;
 
             isJumping = jumpInput > 0f;
             if (isJumping)
