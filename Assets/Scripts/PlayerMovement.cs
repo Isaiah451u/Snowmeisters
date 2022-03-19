@@ -18,8 +18,7 @@ public class PlayerMovement : MonoBehaviour
     private Animator animator;
     private float jumpInput;
     private float horizontalInput;
-    public float jumpCounter;
-    public float maxJumps;
+    private bool candoubleJump;
 
 
     void Awake()
@@ -46,8 +45,36 @@ public class PlayerMovement : MonoBehaviour
             rBody.drag = 2.7f;
         }
 
-        if (groundCheck)
-            jumpCounter = 0;
+        if (!isSwinging)
+        {
+            if (groundCheck)
+            {
+                candoubleJump = true;
+            }
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                if (groundCheck)
+                {
+                    rBody.velocity = Vector2.up * jumpSpeed;
+                    animator.SetBool("isJumping", true);
+                }
+                else
+                {
+                    if (candoubleJump)
+                    {
+                        rBody.velocity = Vector2.up * jumpSpeed;
+                        animator.SetBool("isJumping", true);
+                        candoubleJump = false;
+                    }
+                }
+            }
+            else
+            {
+                animator.SetBool("isJumping", false);
+            }
+
+        }
     }
 
     void FixedUpdate()
@@ -97,32 +124,6 @@ public class PlayerMovement : MonoBehaviour
             animator.SetFloat("Speed", 0f);
         }
 
-        if (!isSwinging)
-        {
-
-            if (jumpCounter > 0)
-            {
-                jumpCounter = jumpCounter - 1;
-
-                isJumping = jumpInput > 0f;
-                if (isJumping)
-                {
-                    rBody.velocity = new Vector2(rBody.velocity.x, jumpSpeed);
-                    animator.SetBool("isJumping", true);
-                }
-                else
-                {
-                    animator.SetBool("isJumping", false);
-                }
-            }
-        }
-    }
-
-    void OnCollisionEnter2D(Collision2D collider)
-    {
-        if (collider.gameObject.layer == groundLayer)
-        {
-            jumpCounter = maxJumps;
-        }
+       
     }
 }
