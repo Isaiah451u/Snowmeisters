@@ -20,11 +20,17 @@ public class PlayerMovement : MonoBehaviour
     private float horizontalInput;
     private bool candoubleJump;
 
+    public AudioClip walking;
+    public AudioClip jump;
+    private AudioSource audioSource;
+    public AudioSource gameManager;
+
     void Awake()
     {
         playerSprite = GetComponent<SpriteRenderer>();
         rBody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -53,15 +59,19 @@ public class PlayerMovement : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.Space))
             {
+                
+
                 if (groundCheck)
                 {
                     rBody.velocity = Vector2.up * jumpSpeed;
+                    gameManager.PlayOneShot(jump);
                 }
                 else
                 {
                     if (candoubleJump)
                     {
                         rBody.velocity = Vector2.up * jumpSpeed;
+                        gameManager.PlayOneShot(jump);
                         candoubleJump = false;
                     }
                 }
@@ -84,7 +94,6 @@ public class PlayerMovement : MonoBehaviour
         {
             animator.SetFloat("Speed", Mathf.Abs(horizontalInput));
             playerSprite.flipX = horizontalInput < 0f;
-
 
             if (isSwinging)
             {
@@ -115,7 +124,7 @@ public class PlayerMovement : MonoBehaviour
                 if (horizontalInput < 0f || horizontalInput > 0f)
                 {
                     playerSprite.flipX = horizontalInput < 0f;
-
+                    audioSource.UnPause();
                     var groundForce = speed * 2f;
                     rBody.AddForce(new Vector2((horizontalInput * groundForce - rBody.velocity.x) * groundForce, 0));
                     rBody.velocity = new Vector2(Mathf.Clamp(rBody.velocity.x, -10, 10), rBody.velocity.y);
@@ -125,6 +134,7 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             animator.SetFloat("Speed", 0f);
+            audioSource.Pause(); 
         }
 
        
