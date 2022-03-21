@@ -24,6 +24,9 @@ public class RopeSystem : MonoBehaviour
 
     public bool isClimbing;
 
+    public AudioSource gameManager;
+    public AudioClip grapple;
+
     #region tristan visual variables :3
     private GameObject grappleTrigger;
 
@@ -81,9 +84,9 @@ public class RopeSystem : MonoBehaviour
 
             if (isClimbing == true)
                 return;
-            if (playerMovement.rBody.velocity.x >= 0.05f)
+            if (Input.GetAxisRaw("Horizontal") < 0f || Input.GetAxisRaw("Horizontal") > 0f)
                 return;
-
+ 
             if (ropeAttached) return; //if the rope is already attatched, break out of the code
             ropeRenderer.enabled = true;
 
@@ -91,6 +94,7 @@ public class RopeSystem : MonoBehaviour
 
             if (hit.collider != null) //If the collider hits
             {
+                gameManager.PlayOneShot(grapple);
                 ropeAttached = true;
                 if (!ropePositions.Contains(hit.point))
                 {
