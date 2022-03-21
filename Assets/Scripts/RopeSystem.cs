@@ -81,7 +81,7 @@ public class RopeSystem : MonoBehaviour
 
             if (isClimbing == true)
                 return;
-            if (playerMovement.rBody.velocity != new Vector2(0, 0))
+            if (playerMovement.rBody.velocity.x >= 0.05f)
                 return;
 
             if (ropeAttached) return; //if the rope is already attatched, break out of the code

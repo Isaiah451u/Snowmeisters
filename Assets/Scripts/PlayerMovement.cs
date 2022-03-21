@@ -18,7 +18,8 @@ public class PlayerMovement : MonoBehaviour
     private Animator animator;
     private float jumpInput;
     private float horizontalInput;
-    
+    private bool candoubleJump;
+
 
     void Awake()
     {
@@ -39,9 +40,40 @@ public class PlayerMovement : MonoBehaviour
         {
             rBody.drag = .15f;
         }
-        else if(isSwinging == false && groundCheck)
+        else if (isSwinging == false && groundCheck)
         {
             rBody.drag = 2.7f;
+        }
+
+        if (!isSwinging)
+        {
+            if (groundCheck)
+            {
+                candoubleJump = true;
+            }
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                if (groundCheck)
+                {
+                    rBody.velocity = Vector2.up * jumpSpeed;
+                    animator.SetBool("isJumping", true);
+                }
+                else
+                {
+                    if (candoubleJump)
+                    {
+                        rBody.velocity = Vector2.up * jumpSpeed;
+                        animator.SetBool("isJumping", true);
+                        candoubleJump = false;
+                    }
+                }
+            }
+            else
+            {
+                animator.SetBool("isJumping", false);
+            }
+
         }
     }
 
@@ -92,21 +124,6 @@ public class PlayerMovement : MonoBehaviour
             animator.SetFloat("Speed", 0f);
         }
 
-        if (!isSwinging)
-        {
-            if (!groundCheck) return;
-
-            isJumping = jumpInput > 0f;
-            if (isJumping)
-            {
-                rBody.velocity = new Vector2(rBody.velocity.x, jumpSpeed);
-                animator.SetBool("isJumping", true);
-            }
-            else
-            {
-                animator.SetBool("isJumping", false);
-            }
-        }
+       
     }
-
 }
