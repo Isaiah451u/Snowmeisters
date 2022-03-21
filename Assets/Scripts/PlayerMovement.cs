@@ -56,28 +56,30 @@ public class PlayerMovement : MonoBehaviour
                 if (groundCheck)
                 {
                     rBody.velocity = Vector2.up * jumpSpeed;
-                    animator.SetBool("isJumping", true);
                 }
                 else
                 {
                     if (candoubleJump)
                     {
                         rBody.velocity = Vector2.up * jumpSpeed;
-                        animator.SetBool("isJumping", true);
                         candoubleJump = false;
                     }
                 }
             }
-            else
-            {
-                animator.SetBool("isJumping", false);
-            }
-
         }
     }
 
     void FixedUpdate()
     {
+        if (groundCheck)
+        {
+            animator.SetBool("isJumping", false);
+        }
+        else
+        {
+            animator.SetBool("isJumping", true);
+        }
+
         if (horizontalInput < 0f || horizontalInput > 0f)
         {
             animator.SetFloat("Speed", Mathf.Abs(horizontalInput));

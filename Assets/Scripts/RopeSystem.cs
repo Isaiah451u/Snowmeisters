@@ -81,7 +81,7 @@ public class RopeSystem : MonoBehaviour
 
             if (isClimbing == true)
                 return;
-            if (playerMovement.rBody.velocity.x >= 0.05f)
+            if (Input.GetAxisRaw("Horizontal") < 0f || Input.GetAxisRaw("Horizontal") > 0f)
                 return;
 
             if (ropeAttached) return; //if the rope is already attatched, break out of the code
