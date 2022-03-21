@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/StartScene.unity
     guid: 0c08a5234451952448bbafab1b672a1f
   - enabled: 0
+    path: Assets/Scenes/Debug/TristanTestScene.unity
+    guid: 15022c7b07c00aa4c9130e1e4f5786ee
+  - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 0
@@ -20,7 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/IntroductionScene.unity
     guid: fb2acb28bdaec0642826986e4f327922
-  - enabled: 0
-    path: Assets/Scenes/Debug/TristanTestScene.unity
-    guid: 15022c7b07c00aa4c9130e1e4f5786ee
+  - enabled: 1
+    path: Assets/Scenes/Level2Scene.unity
+    guid: 4626cab9a0ee35e4783327f447476d2f
   m_configObjects: {}
