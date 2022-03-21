@@ -7,6 +7,8 @@ public class Parralax : MonoBehaviour
     public GameObject follow;
     private float length, startPosition;
     public float parralax;
+    public float offsetX;
+    public float offsetY;
 
     // Start is called before the first frame update
     void Start()
@@ -21,7 +23,7 @@ public class Parralax : MonoBehaviour
         float temp = follow.transform.position.x * (1 - parralax);
         float dist = follow.transform.position.x * parralax;
 
-        transform.position = new Vector3(startPosition + dist, follow.transform.position.y + .5f, transform.position.z);
+        transform.position = new Vector3(startPosition + dist + offsetX, follow.transform.position.y + offsetY, transform.position.z);
 
         if (temp > startPosition + length) { startPosition += length; }
         else if (temp < startPosition - length) { startPosition -= length; }

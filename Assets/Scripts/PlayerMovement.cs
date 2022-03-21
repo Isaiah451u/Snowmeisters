@@ -20,7 +20,6 @@ public class PlayerMovement : MonoBehaviour
     private float horizontalInput;
     private bool candoubleJump;
 
-
     void Awake()
     {
         playerSprite = GetComponent<SpriteRenderer>();
@@ -83,6 +82,8 @@ public class PlayerMovement : MonoBehaviour
         {
             animator.SetFloat("Speed", Mathf.Abs(horizontalInput));
             playerSprite.flipX = horizontalInput < 0f;
+
+
             if (isSwinging)
             {
 
