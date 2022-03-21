@@ -111,7 +111,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3485011635781462098}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.31, y: -0.76, z: 0}
+  m_LocalPosition: {x: 0.31, y: -6.16, z: 0}
   m_LocalScale: {x: 3.01, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8237247262531361358}
@@ -471,7 +471,7 @@ MonoBehaviour:
   ropeHook: {x: 0, y: 0}
   swingForce: 4
   speed: 10
-  jumpSpeed: 20.46
+  jumpSpeed: 30
   groundCheck: 0
   isSwinging: 0
   groundLayer:
@@ -479,7 +479,9 @@ MonoBehaviour:
     m_Bits: 192
   groundCheckObject: {fileID: 3485011635781462099}
   rBody: {fileID: 0}
-  tailSprite: {fileID: 0}
+  walking: {fileID: 8300000, guid: 061166df3a080884295ee55c38ff8793, type: 3}
+  jump: {fileID: 8300000, guid: 119f90ff675744046bb0571a14d6544d, type: 3}
+  gameManager: {fileID: 0}
 --- !u!114 &8237247262531361349
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -501,6 +503,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   isClimbing: 0
+  gameManager: {fileID: 0}
+  grapple: {fileID: 8300000, guid: 6ade0440aad07734d8402c382a572139, type: 3}
 --- !u!120 &8237247262531361372
 LineRenderer:
   m_ObjectHideFlags: 0
