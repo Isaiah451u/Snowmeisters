@@ -40,17 +40,17 @@ AnimationClip:
   - curve:
     - time: 0
       value: {fileID: 21300000, guid: 08e8cb09c5a5908459ac80db34f9a671, type: 3}
-    - time: 0.016666668
+    - time: 0.16666667
       value: {fileID: 21300000, guid: 79ddc64a5503d0d49bf3555fe9bfdb90, type: 3}
-    - time: 0.033333335
+    - time: 0.33333334
       value: {fileID: 21300000, guid: ccc082d21b99d964c93da7fcb503309e, type: 3}
-    - time: 0.05
+    - time: 0.5
       value: {fileID: 21300000, guid: 7ac52040a940803469b9dad99a025ee3, type: 3}
     attribute: m_Sprite
     path: ClimbSprite
     classID: 212
     script: {fileID: 0}
-  m_SampleRate: 60
+  m_SampleRate: 6
   m_WrapMode: 0
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
@@ -81,7 +81,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.06666667
+    m_StopTime: 0.6666667
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
