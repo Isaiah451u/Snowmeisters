@@ -25,6 +25,7 @@ public class PlayerMovement : MonoBehaviour
     private AudioSource audioSource;
     public AudioSource gameManager;
 
+    public SpriteRenderer climbingSprite;
     void Awake()
     {
         playerSprite = GetComponent<SpriteRenderer>();
@@ -137,6 +138,15 @@ public class PlayerMovement : MonoBehaviour
             audioSource.Pause(); 
         }
 
-       
+
+        if (playerSprite.enabled == false)
+        {
+            climbingSprite.enabled = true;
+        }
+        else if (climbingSprite.enabled == false)
+        {
+            playerSprite.enabled = true;
+        }
+
     }
 }
