@@ -33,7 +33,7 @@ public class RopeSystem : MonoBehaviour
     #endregion
     void Awake() //Sets the initial components
     {
-        Variables.Saved.Set("isClimbing", false);
+        //Variables.Saved.Set("Climbing", false);
 
         ropeJoint.enabled = false;
         playerPosition = transform.position;
@@ -45,7 +45,7 @@ public class RopeSystem : MonoBehaviour
 
     void Update()
     {
-        isClimbing = (bool)Variables.Saved.Get("Climbing");
+        //isClimbing = (bool)Variables.Saved.Get("Climbing");
 
         var worldMousePosition =
             Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0f)); //Gets the mouse current position and saves it to a variable
@@ -84,8 +84,8 @@ public class RopeSystem : MonoBehaviour
         if (Input.GetMouseButton(0)) //Checks if the left mouse button was pressed
         {
 
-            if (isClimbing == true)
-                return;
+           //if (isClimbing == true)
+                //return;
             if (playerMovement.groundCheck)
                 return;
  
