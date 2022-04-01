@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.VisualScripting;
+
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -26,6 +28,7 @@ public class PlayerMovement : MonoBehaviour
     public AudioSource gameManager;
 
     public SpriteRenderer climbingSprite;
+    public ParticleSystem dustParticles;
     void Awake()
     {
         playerSprite = GetComponent<SpriteRenderer>();
@@ -78,6 +81,16 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
         }
+
+        if(climbingSprite.enabled == false)
+        {
+            playerSprite.enabled = true;
+        }
+        else if(playerSprite.enabled == false)
+        {
+            climbingSprite.enabled = true;
+        }
+  
     }
 
     void FixedUpdate()
@@ -85,6 +98,8 @@ public class PlayerMovement : MonoBehaviour
         if (groundCheck)
         {
             animator.SetBool("isJumping", false);
+            animator.SetBool("ClimbingUp", false);
+            animator.SetBool("ClimbingDown", false);
         }
         else
         {
@@ -94,11 +109,18 @@ public class PlayerMovement : MonoBehaviour
         if (horizontalInput < 0f || horizontalInput > 0f)
         {
             animator.SetFloat("Speed", Mathf.Abs(horizontalInput));
-            playerSprite.flipX = horizontalInput < 0f;
+            if (horizontalInput < 0f)
+            {
+                gameObject.transform.localScale = new Vector3(-.234f, .234f, .234f);
+            }
+            else
+            {
+                gameObject.transform.localScale = new Vector3(.234f, .234f, .234f);
+            }
 
             if (isSwinging)
             {
-
+                Variables.Application.Set("CanClimb", false);
                 // 1 - Get a normalized direction vector from the player to the hook point
                 var playerToHookDirection = (ropeHook - (Vector2)transform.position).normalized;
 
@@ -122,31 +144,23 @@ public class PlayerMovement : MonoBehaviour
             }
             else
             {
-                if (horizontalInput < 0f || horizontalInput > 0f)
-                {
-                    playerSprite.flipX = horizontalInput < 0f;
-                    audioSource.UnPause();
-                    var groundForce = speed * 2f;
-                    rBody.AddForce(new Vector2((horizontalInput * groundForce - rBody.velocity.x) * groundForce, 0));
-                    rBody.velocity = new Vector2(Mathf.Clamp(rBody.velocity.x, -10, 10), rBody.velocity.y);
-                }
+                Variables.Application.Set("CanClimb", true);
+                if (groundCheck)
+                    dustParticles.Play();
+                else
+                    dustParticles.Stop();
+
+                audioSource.UnPause();
+                var groundForce = speed * 2f;
+                rBody.AddForce(new Vector2((horizontalInput * groundForce - rBody.velocity.x) * groundForce, 0));
+                rBody.velocity = new Vector2(Mathf.Clamp(rBody.velocity.x, -10, 10), rBody.velocity.y);
             }
         }
         else
         {
+            dustParticles.Stop();
             animator.SetFloat("Speed", 0f);
             audioSource.Pause(); 
         }
-
-
-        if (playerSprite.enabled == false)
-        {
-            climbingSprite.enabled = true;
-        }
-        else if (climbingSprite.enabled == false)
-        {
-            playerSprite.enabled = true;
-        }
-
     }
 }
