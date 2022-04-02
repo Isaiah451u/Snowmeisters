@@ -33,6 +33,8 @@ public class RopeSystem : MonoBehaviour
     #endregion
     void Awake() //Sets the initial components
     {
+        //Variables.Saved.Set("Climbing", false);
+
         ropeJoint.enabled = false;
         playerPosition = transform.position;
         ropeHingeAnchorRb = ropeHingeAnchor.GetComponent<Rigidbody2D>();
@@ -43,7 +45,7 @@ public class RopeSystem : MonoBehaviour
 
     void Update()
     {
-        isClimbing = (bool)Variables.Saved.Get("Climbing");
+        //isClimbing = (bool)Variables.Saved.Get("Climbing");
 
         var worldMousePosition =
             Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0f)); //Gets the mouse current position and saves it to a variable
@@ -82,9 +84,9 @@ public class RopeSystem : MonoBehaviour
         if (Input.GetMouseButton(0)) //Checks if the left mouse button was pressed
         {
 
-            if (isClimbing == true)
-                return;
-            if (Input.GetAxisRaw("Horizontal") < 0f || Input.GetAxisRaw("Horizontal") > 0f)
+           //if (isClimbing == true)
+                //return;
+            if (playerMovement.groundCheck)
                 return;
  
             if (ropeAttached) return; //if the rope is already attatched, break out of the code
@@ -115,7 +117,12 @@ public class RopeSystem : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButton(1)) //reset if space
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButton(1)) //reset if space or right click
+        {
+            ResetRope();
+        }
+
+        if (playerMovement.groundCheck)
         {
             ResetRope();
         }
