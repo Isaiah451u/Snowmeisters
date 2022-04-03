@@ -68,6 +68,7 @@ public class PlayerMovement : MonoBehaviour
 
                 if (groundCheck)
                 {
+                    animator.SetBool("isJumping", true);
                     rBody.velocity = Vector2.up * jumpSpeed;
                     gameManager.PlayOneShot(jump);
                 }
@@ -101,10 +102,6 @@ public class PlayerMovement : MonoBehaviour
             animator.SetBool("isJumping", false);
             animator.SetBool("ClimbingUp", false);
             animator.SetBool("ClimbingDown", false);
-        }
-        else
-        {
-            animator.SetBool("isJumping", true);
         }
 
         if (horizontalInput < 0f || horizontalInput > 0f)
