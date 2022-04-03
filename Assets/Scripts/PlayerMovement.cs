@@ -13,11 +13,8 @@ public class PlayerMovement : MonoBehaviour
     public bool groundCheck;
     public bool isSwinging;
     public LayerMask groundLayer;
-    public Transform groundCheckObject;
-    private SpriteRenderer playerSprite;
-    public Rigidbody2D rBody;
+    
     private bool isJumping;
-    private Animator animator;
     private float jumpInput;
     private float horizontalInput;
     private bool candoubleJump;
@@ -27,6 +24,10 @@ public class PlayerMovement : MonoBehaviour
     private AudioSource audioSource;
     public AudioSource gameManager;
 
+    private SpriteRenderer playerSprite;
+    public Transform groundCheckObject;
+    public Rigidbody2D rBody;
+    public Animator animator;
     public SpriteRenderer climbingSprite;
     public ParticleSystem dustParticles;
     void Awake()

@@ -26,6 +26,7 @@ public class RopeSystem : MonoBehaviour
 
     public AudioSource gameManager;
     public AudioClip grapple;
+    public Transform grapplePoint;
 
     #region tristan visual variables :3
     private GameObject grappleTrigger;
@@ -36,7 +37,7 @@ public class RopeSystem : MonoBehaviour
         //Variables.Saved.Set("Climbing", false);
 
         ropeJoint.enabled = false;
-        playerPosition = transform.position;
+        playerPosition = grapplePoint.position;
         ropeHingeAnchorRb = ropeHingeAnchor.GetComponent<Rigidbody2D>();
         ropeHingeAnchorSprite = ropeHingeAnchor.GetComponent<SpriteRenderer>();
 
@@ -57,7 +58,7 @@ public class RopeSystem : MonoBehaviour
         }
 
         var aimDirection = Quaternion.Euler(0, 0, aimAngle * Mathf.Rad2Deg) * Vector2.right; //Creates a Vector that stores aiming information
-        playerPosition = transform.position;
+        playerPosition = grapplePoint.position;
 
         if (!ropeAttached)
         {
@@ -91,6 +92,8 @@ public class RopeSystem : MonoBehaviour
  
             if (ropeAttached) return; //if the rope is already attatched, break out of the code
             ropeRenderer.enabled = true;
+
+            playerMovement.animator.SetBool("isSwinging", true);
 
             var hit = Physics2D.Raycast(playerPosition, aimDirection, ropeMaxCastDistance, ropeLayerMask); //Shoots a raycast where the player is aiming, attatching to a specific layer
 
@@ -130,6 +133,7 @@ public class RopeSystem : MonoBehaviour
 
     private void ResetRope() //reset method for the grapple
     {
+        playerMovement.animator.SetBool("isSwinging", false);
         ropeJoint.enabled = false;
         ropeAttached = false;
         playerMovement.isSwinging = false;
@@ -190,7 +194,7 @@ public class RopeSystem : MonoBehaviour
             }
             else
             {
-                ropeRenderer.SetPosition(i, transform.position);
+                ropeRenderer.SetPosition(i, grapplePoint.position);
             }
         }
     }
