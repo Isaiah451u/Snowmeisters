@@ -37,7 +37,7 @@ public class RopeSystem : MonoBehaviour
         //Variables.Saved.Set("Climbing", false);
 
         ropeJoint.enabled = false;
-        playerPosition = grapplePoint.position;
+        playerPosition = transform.position;
         ropeHingeAnchorRb = ropeHingeAnchor.GetComponent<Rigidbody2D>();
         ropeHingeAnchorSprite = ropeHingeAnchor.GetComponent<SpriteRenderer>();
 
@@ -58,7 +58,7 @@ public class RopeSystem : MonoBehaviour
         }
 
         var aimDirection = Quaternion.Euler(0, 0, aimAngle * Mathf.Rad2Deg) * Vector2.right; //Creates a Vector that stores aiming information
-        playerPosition = grapplePoint.position;
+        playerPosition = transform.position;
 
         if (!ropeAttached)
         {
