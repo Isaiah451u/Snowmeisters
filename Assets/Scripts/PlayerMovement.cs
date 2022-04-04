@@ -64,8 +64,6 @@ public class PlayerMovement : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                
-
                 if (groundCheck)
                 {
                     animator.SetBool("isJumping", true);
@@ -76,6 +74,7 @@ public class PlayerMovement : MonoBehaviour
                 {
                     if (candoubleJump)
                     {
+                        animator.SetBool("isJumping", true);
                         rBody.velocity = Vector2.up * jumpSpeed;
                         gameManager.PlayOneShot(jump);
                         candoubleJump = false;
