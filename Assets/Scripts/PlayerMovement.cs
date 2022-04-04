@@ -98,6 +98,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (groundCheck)
         {
+            animator.SetBool("ClimbAttatch", false);
             animator.SetBool("isJumping", false);
             animator.SetBool("ClimbingUp", false);
             animator.SetBool("ClimbingDown", false);
