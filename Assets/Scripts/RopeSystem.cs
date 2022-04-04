@@ -120,7 +120,7 @@ public class RopeSystem : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButton(1)) //reset if space or right click
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButton(1)) //reset if space or right/left click
         {
             ResetRope();
         }

@@ -143,8 +143,15 @@ public class PlayerMovement : MonoBehaviour
             else
             {
                 Variables.Application.Set("CanClimb", true);
-                dustParticles.Play();
 
+                if (groundCheck)
+                {
+                    dustParticles.Play();
+                }
+                else
+                {
+                    dustParticles.Stop();
+                }
 
                 audioSource.UnPause();
                 var groundForce = speed * 2f;
