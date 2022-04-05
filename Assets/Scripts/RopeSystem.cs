@@ -75,6 +75,11 @@ public class RopeSystem : MonoBehaviour
         HandleRopeLength();
         HandleGrappleVisuals();
 
+        if ((bool)Variables.Application.Get("isDead"))
+        {
+            ResetRope();
+        }
+
     }
 
 
@@ -93,12 +98,12 @@ public class RopeSystem : MonoBehaviour
             if (ropeAttached) return; //if the rope is already attatched, break out of the code
             ropeRenderer.enabled = true;
 
-            playerMovement.animator.SetBool("isSwinging", true);
-
             var hit = Physics2D.Raycast(playerPosition, aimDirection, ropeMaxCastDistance, ropeLayerMask); //Shoots a raycast where the player is aiming, attatching to a specific layer
 
             if (hit.collider != null) //If the collider hits
             {
+                playerMovement.animator.SetBool("isSwinging", true);
+
                 gameManager.PlayOneShot(grapple);
                 ropeAttached = true;
                 if (!ropePositions.Contains(hit.point))
@@ -142,6 +147,7 @@ public class RopeSystem : MonoBehaviour
         ropeRenderer.SetPosition(1, transform.position);
         ropePositions.Clear();
         ropeHingeAnchorSprite.enabled = false;
+        Variables.Application.Set("isDead", false);
     }
 
     private void UpdateRopePositions()
