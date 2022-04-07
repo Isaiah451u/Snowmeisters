@@ -18,7 +18,7 @@ public class Parralax : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         float temp = follow.transform.position.x * (1 - parralax);
         float dist = follow.transform.position.x * parralax;
