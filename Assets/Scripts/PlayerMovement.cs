@@ -29,7 +29,10 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody2D rBody;
     public Animator animator;
     public SpriteRenderer climbingSprite;
+
     public ParticleSystem dustParticles;
+    public GameObject jumpParticles;
+    public GameObject doubleJumpParticles;
     void Awake()
     {
         playerSprite = GetComponent<SpriteRenderer>();
@@ -66,6 +69,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 if (groundCheck)
                 {
+                    Instantiate(jumpParticles, gameObject.transform.position, gameObject.transform.rotation);
                     animator.SetBool("isJumping", true);
                     rBody.velocity = Vector2.up * jumpSpeed;
                     gameManager.PlayOneShot(jump);
@@ -74,6 +78,7 @@ public class PlayerMovement : MonoBehaviour
                 {
                     if (candoubleJump)
                     {
+                        Instantiate(jumpParticles, gameObject.transform.position, gameObject.transform.rotation);
                         animator.SetBool("isJumping", true);
                         rBody.velocity = Vector2.up * jumpSpeed;
                         gameManager.PlayOneShot(jump);
