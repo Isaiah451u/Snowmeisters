@@ -24,12 +24,18 @@ public class RopeSystem : MonoBehaviour
 
     public bool isClimbing;
 
+    public AudioSource gameManager;
+    public AudioClip grapple;
+    public Transform grapplePoint;
+
     #region tristan visual variables :3
     private GameObject grappleTrigger;
 
     #endregion
     void Awake() //Sets the initial components
     {
+        //Variables.Saved.Set("Climbing", false);
+
         ropeJoint.enabled = false;
         playerPosition = transform.position;
         ropeHingeAnchorRb = ropeHingeAnchor.GetComponent<Rigidbody2D>();
@@ -40,7 +46,7 @@ public class RopeSystem : MonoBehaviour
 
     void Update()
     {
-        isClimbing = (bool)Variables.Saved.Get("Climbing");
+        //isClimbing = (bool)Variables.Saved.Get("Climbing");
 
         var worldMousePosition =
             Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0f)); //Gets the mouse current position and saves it to a variable
@@ -69,6 +75,11 @@ public class RopeSystem : MonoBehaviour
         HandleRopeLength();
         HandleGrappleVisuals();
 
+        if ((bool)Variables.Application.Get("isDead"))
+        {
+            ResetRope();
+        }
+
     }
 
 
@@ -79,11 +90,11 @@ public class RopeSystem : MonoBehaviour
         if (Input.GetMouseButton(0)) //Checks if the left mouse button was pressed
         {
 
-            if (isClimbing == true)
+           //if (isClimbing == true)
+                //return;
+            if (playerMovement.groundCheck)
                 return;
-            if (playerMovement.rBody.velocity.x >= 0.05f)
-                return;
-
+ 
             if (ropeAttached) return; //if the rope is already attatched, break out of the code
             ropeRenderer.enabled = true;
 
@@ -91,6 +102,9 @@ public class RopeSystem : MonoBehaviour
 
             if (hit.collider != null) //If the collider hits
             {
+                playerMovement.animator.SetBool("isSwinging", true);
+
+                gameManager.PlayOneShot(grapple);
                 ropeAttached = true;
                 if (!ropePositions.Contains(hit.point))
                 {
@@ -111,7 +125,12 @@ public class RopeSystem : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButton(1)) //reset if space
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButton(1)) //reset if space or right/left click
+        {
+            ResetRope();
+        }
+
+        if (playerMovement.groundCheck)
         {
             ResetRope();
         }
@@ -119,6 +138,7 @@ public class RopeSystem : MonoBehaviour
 
     private void ResetRope() //reset method for the grapple
     {
+        playerMovement.animator.SetBool("isSwinging", false);
         ropeJoint.enabled = false;
         ropeAttached = false;
         playerMovement.isSwinging = false;
@@ -127,6 +147,7 @@ public class RopeSystem : MonoBehaviour
         ropeRenderer.SetPosition(1, transform.position);
         ropePositions.Clear();
         ropeHingeAnchorSprite.enabled = false;
+        Variables.Application.Set("isDead", false);
     }
 
     private void UpdateRopePositions()
@@ -179,7 +200,7 @@ public class RopeSystem : MonoBehaviour
             }
             else
             {
-                ropeRenderer.SetPosition(i, transform.position);
+                ropeRenderer.SetPosition(i, grapplePoint.position);
             }
         }
     }
