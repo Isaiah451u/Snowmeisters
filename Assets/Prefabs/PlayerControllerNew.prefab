@@ -1162,6 +1162,8 @@ MonoBehaviour:
   animator: {fileID: 0}
   climbingSprite: {fileID: 7310561955365353933}
   dustParticles: {fileID: 8797742563619258122}
+  jumpParticles: {fileID: 1514571129434312154, guid: 154c6a5e20d989346878c96a039f0ecf, type: 3}
+  doubleJumpParticles: {fileID: 0}
 --- !u!114 &8237247262531361349
 MonoBehaviour:
   m_ObjectHideFlags: 0

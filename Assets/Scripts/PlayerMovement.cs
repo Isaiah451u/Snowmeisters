@@ -78,7 +78,7 @@ public class PlayerMovement : MonoBehaviour
                 {
                     if (candoubleJump)
                     {
-                        Instantiate(jumpParticles, gameObject.transform.position, gameObject.transform.rotation);
+                        Instantiate(jumpParticles, gameObject.transform.position + new Vector3(), gameObject.transform.rotation);
                         animator.SetBool("isJumping", true);
                         rBody.velocity = Vector2.up * jumpSpeed;
                         gameManager.PlayOneShot(jump);
