@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4201613638802999623}
   - component: {fileID: 4201613638802999616}
   - component: {fileID: 4201613638802999617}
+  - component: {fileID: 1396582761}
   m_Layer: 0
   m_Name: PlayerCamera
   m_TagString: Untagged
@@ -103,6 +104,23 @@ MonoBehaviour:
     _json: '{"nest":{"source":"Macro","macro":0,"embed":null}}'
     _objectReferences:
     - {fileID: 11400000, guid: ee7b3aef1cbe7df40b2df6d387e19520, type: 2}
+--- !u!114 &1396582761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4201613638802999620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2fba25a5cd15594e8f050a11e386c80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ConfineMode: 0
+  m_BoundingVolume: {fileID: 0}
+  m_BoundingShape2D: {fileID: 0}
+  m_ConfineScreenEdges: 1
+  m_Damping: 0
 --- !u!1 &4201613638848632043
 GameObject:
   m_ObjectHideFlags: 0
@@ -159,7 +177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ad980451443d70438faac0bc6c235a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TrackedObjectOffset: {x: 0.2, y: 0, z: 0}
+  m_TrackedObjectOffset: {x: 0.2, y: 3, z: 0}
   m_LookaheadTime: 0.5
   m_LookaheadSmoothing: 10.5
   m_LookaheadIgnoreY: 1
@@ -171,11 +189,11 @@ MonoBehaviour:
   m_ScreenY: 0.5
   m_CameraDistance: 10
   m_DeadZoneWidth: 0
-  m_DeadZoneHeight: 0.6
+  m_DeadZoneHeight: 0.196
   m_DeadZoneDepth: 0
   m_UnlimitedSoftZone: 0
   m_SoftZoneWidth: 0.277
-  m_SoftZoneHeight: 0.853
+  m_SoftZoneHeight: 0.88
   m_BiasX: 0
   m_BiasY: 0
   m_CenterOnActivate: 1
