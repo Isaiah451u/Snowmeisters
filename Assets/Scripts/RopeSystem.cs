@@ -22,7 +22,7 @@ public class RopeSystem : MonoBehaviour
     private List<Vector2> ropePositions = new List<Vector2>();
     private bool distanceSet;
 
-    public bool isClimbing;
+    public bool canSwing;
 
     public AudioSource gameManager;
     public AudioClip grapple;
@@ -46,7 +46,7 @@ public class RopeSystem : MonoBehaviour
 
     void Update()
     {
-        //isClimbing = (bool)Variables.Saved.Get("Climbing");
+        canSwing = (bool)Variables.Application.Get("canSwing");
 
         var worldMousePosition =
             Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0f)); //Gets the mouse current position and saves it to a variable
@@ -90,8 +90,8 @@ public class RopeSystem : MonoBehaviour
         if (Input.GetMouseButton(0)) //Checks if the left mouse button was pressed
         {
 
-           //if (isClimbing == true)
-                //return;
+           if (canSwing == false)
+                return;
             if (playerMovement.groundCheck)
                 return;
  
@@ -102,6 +102,7 @@ public class RopeSystem : MonoBehaviour
 
             if (hit.collider != null) //If the collider hits
             {
+                Variables.Application.Set("canClimb", false);
                 playerMovement.animator.SetBool("isSwinging", true);
 
                 gameManager.PlayOneShot(grapple);
@@ -148,6 +149,7 @@ public class RopeSystem : MonoBehaviour
         ropePositions.Clear();
         ropeHingeAnchorSprite.enabled = false;
         Variables.Application.Set("isDead", false);
+        Variables.Application.Set("canClimb", true);
     }
 
     private void UpdateRopePositions()
