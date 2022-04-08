@@ -691,7 +691,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   follow: {fileID: 0}
-  parralax: 0.25
+  parralax: 0.4
   offsetX: 0
   offsetY: 0
 --- !u!1 &7788356786854670640
@@ -959,7 +959,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   follow: {fileID: 0}
-  parralax: 0.75
+  parralax: 0.25
   offsetX: 0
   offsetY: 0
 --- !u!1 &7788356787072766473
@@ -1144,7 +1144,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   follow: {fileID: 0}
-  parralax: 0.85
+  parralax: 0.8
   offsetX: 0
   offsetY: 0
 --- !u!1 &7788356787085678095
