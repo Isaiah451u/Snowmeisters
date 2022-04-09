@@ -87,16 +87,6 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
         }
-
-        if(climbingSprite.enabled == false)
-        {
-            playerSprite.enabled = true;
-        }
-        else if(playerSprite.enabled == false)
-        {
-            climbingSprite.enabled = true;
-        }
-  
     }
 
     void FixedUpdate()
