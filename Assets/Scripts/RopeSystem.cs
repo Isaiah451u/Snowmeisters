@@ -7,6 +7,8 @@ using Unity.VisualScripting;
 
 public class RopeSystem : MonoBehaviour
 {
+    private Dictionary<Vector2, int> wrapPointsLookup = new Dictionary<Vector2, int>();
+
     public float climbSpeed = 3f;
 
     public GameObject ropeHingeAnchor;
@@ -68,6 +70,30 @@ public class RopeSystem : MonoBehaviour
         {
             playerMovement.isSwinging = true;
             playerMovement.ropeHook = ropePositions.Last();
+            if (ropePositions.Count > 0)
+            {
+                var lastRopePoint = ropePositions.Last();
+                var playerToCurrentNextHit = Physics2D.Raycast(playerPosition, (lastRopePoint - playerPosition).normalized, Vector2.Distance(playerPosition, lastRopePoint) - 0.1f, ropeLayerMask);
+
+                if (playerToCurrentNextHit)
+                {
+                    var colliderWithVertices = playerToCurrentNextHit.collider as PolygonCollider2D;
+                    if (colliderWithVertices != null)
+                    {
+                        var closestPointToHit = GetClosestColliderPointFromRaycastHit(playerToCurrentNextHit, colliderWithVertices);
+
+                        if (wrapPointsLookup.ContainsKey(closestPointToHit))
+                        {
+                            ResetRope();
+                            return;
+                        }
+
+                        ropePositions.Add(closestPointToHit);
+                        wrapPointsLookup.Add(closestPointToHit, 0);
+                        distanceSet = false;
+                    }
+                }
+            }
         }
 
         HandleInput(aimDirection);
@@ -148,6 +174,7 @@ public class RopeSystem : MonoBehaviour
         ropeRenderer.SetPosition(1, transform.position);
         ropePositions.Clear();
         ropeHingeAnchorSprite.enabled = false;
+        wrapPointsLookup.Clear();
         Variables.Application.Set("isDead", false);
         Variables.Application.Set("canClimb", true);
     }
@@ -230,5 +257,15 @@ public class RopeSystem : MonoBehaviour
         {
             grappleTrigger.SetActive(false);
         }
+    }
+
+    private Vector2 GetClosestColliderPointFromRaycastHit(RaycastHit2D hit, PolygonCollider2D polyCollider)
+    {
+        var distanceDictionary = polyCollider.points.ToDictionary<Vector2, float, Vector2>(
+            position => Vector2.Distance(hit.point, polyCollider.transform.TransformPoint(position)),
+            position => polyCollider.transform.TransformPoint(position));
+
+        var orderedDictionary = distanceDictionary.OrderBy(e => e.Key);
+        return orderedDictionary.Any() ? orderedDictionary.First().Value : Vector2.zero;
     }
 }

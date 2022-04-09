@@ -123,8 +123,6 @@ public class PlayerMovement : MonoBehaviour
 
             if (isSwinging)
             {
-                Variables.Application.Set("CanClimb", false);
-                // 1 - Get a normalized direction vector from the player to the hook point
                 var playerToHookDirection = (ropeHook - (Vector2)transform.position).normalized;
 
                 // 2 - Inverse the direction to get a perpendicular direction
