@@ -1155,7 +1155,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 192
   walking: {fileID: 8300000, guid: 061166df3a080884295ee55c38ff8793, type: 3}
-  jump: {fileID: 8300000, guid: 119f90ff675744046bb0571a14d6544d, type: 3}
+  jump: {fileID: 8300000, guid: 411871bbb8d45e84481d9d5c35ecd210, type: 3}
   gameManager: {fileID: 0}
   groundCheckObject: {fileID: 3485011635781462099}
   rBody: {fileID: 0}
@@ -1184,9 +1184,9 @@ MonoBehaviour:
   ropeLayerMask:
     serializedVersion: 2
     m_Bits: 128
-  isClimbing: 0
+  canSwing: 0
   gameManager: {fileID: 0}
-  grapple: {fileID: 8300000, guid: 6ade0440aad07734d8402c382a572139, type: 3}
+  grapple: {fileID: 8300000, guid: 119f90ff675744046bb0571a14d6544d, type: 3}
   grapplePoint: {fileID: 1496785873}
 --- !u!120 &8237247262531361372
 LineRenderer:
