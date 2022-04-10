@@ -572,8 +572,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 92.54635, y: -313.92825}
-  m_SizeDelta: {x: 185.0927, y: 45.5713}
+  m_AnchoredPosition: {x: 97.1154, y: -316.2128}
+  m_SizeDelta: {x: 194.2308, y: 50.1404}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7502491077368758145
 CanvasRenderer:
@@ -682,7 +682,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _data:
-    _json: '{"declarations":{"collection":{"$content":[],"$version":"A"},"$version":"A"}}'
+    _json: '{"declarations":{"collection":{"$content":[{"name":"SceneName","value":{"$content":"StartScene","$type":"System.String"},"$version":"A"}],"$version":"A"},"$version":"A"}}'
     _objectReferences: []
 --- !u!114 &5790249930002215258
 MonoBehaviour:
@@ -699,7 +699,7 @@ MonoBehaviour:
   _data:
     _json: '{"nest":{"source":"Macro","macro":0,"embed":null}}'
     _objectReferences:
-    - {fileID: 11400000, guid: 0c4cf8b6e684f4d40b4eb7dfd8407b48, type: 2}
+    - {fileID: 11400000, guid: eaa8976114731bc438a6652baa85fddc, type: 2}
 --- !u!82 &2611097286919904437
 AudioSource:
   m_ObjectHideFlags: 0
@@ -894,7 +894,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 80.3385, y: -459.49954}
+  m_AnchoredPosition: {x: 80.3385, y: -464.06866}
   m_SizeDelta: {x: 160.677, y: 45.5713}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7360639203205011086
@@ -1021,7 +1021,7 @@ MonoBehaviour:
   _data:
     _json: '{"nest":{"source":"Macro","macro":0,"embed":null}}'
     _objectReferences:
-    - {fileID: 11400000, guid: 0c4cf8b6e684f4d40b4eb7dfd8407b48, type: 2}
+    - {fileID: 11400000, guid: 2dd59b678bef35848b55ada0f57589e7, type: 2}
 --- !u!82 &601481094570697035
 AudioSource:
   m_ObjectHideFlags: 0
