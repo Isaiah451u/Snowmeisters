@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: ApplicationVariables
   m_EditorClassIdentifier: 
   _data:
-    _json: '{"declarations":{"collection":{"$content":[{"name":"canClimb","value":{"$content":true,"$type":"System.Boolean"},"$version":"A"},{"name":"canSwing","value":{"$content":false,"$type":"System.Boolean"},"$version":"A"},{"name":"isDead","value":{"$content":false,"$type":"System.Boolean"},"$version":"A"},{"name":"DeathParticles","value":{"$content":0,"$type":"UnityEngine.Object"},"$version":"A"},{"name":"FullscreenMode","value":{"$content":false,"$type":"System.Boolean"},"$version":"A"},{"name":"Volume","value":{"$content":0.0,"$type":"System.Single"},"$version":"A"}],"$version":"A"},"$version":"A"}}'
+    _json: '{"declarations":{"collection":{"$content":[{"name":"canClimb","value":{"$content":true,"$type":"System.Boolean"},"$version":"A"},{"name":"canSwing","value":{"$content":false,"$type":"System.Boolean"},"$version":"A"},{"name":"isDead","value":{"$content":false,"$type":"System.Boolean"},"$version":"A"},{"name":"DeathParticles","value":{"$content":0,"$type":"UnityEngine.Object"},"$version":"A"},{"name":"FullscreenMode","value":{"$content":false,"$type":"System.Boolean"},"$version":"A"},{"name":"Volume","value":{"$content":1.0,"$type":"System.Single"},"$version":"A"}],"$version":"A"},"$version":"A"}}'
     _objectReferences:
     - {fileID: 423496292081841140, guid: 89acc5e9ddd510c4584aed81ef0d63ce, type: 3}
