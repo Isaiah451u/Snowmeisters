@@ -34,7 +34,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 81.79853, y: -157.43561}
+  m_AnchoredPosition: {x: 81.79853, y: -157.47656}
   m_SizeDelta: {x: 363.8439, y: 46.5392}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1792063945364364037
@@ -111,7 +111,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 81.79853, y: -94.166016}
+  m_AnchoredPosition: {x: 81.79853, y: -94.20697}
   m_SizeDelta: {x: 189.2783, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8302332583026090553
@@ -206,7 +206,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 81.79853, y: -372.33105}
+  m_AnchoredPosition: {x: 81.79853, y: -372.372}
   m_SizeDelta: {x: 160.677, y: 45.5713}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4498014607170020548
@@ -2640,7 +2640,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 81.79853, y: -296.27582}
+  m_AnchoredPosition: {x: 81.79853, y: -296.31677}
   m_SizeDelta: {x: 363.8439, y: 46.5392}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3118261843105007638
@@ -3524,7 +3524,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 81.79853, y: -226.85571}
+  m_AnchoredPosition: {x: 81.79853, y: -226.89667}
   m_SizeDelta: {x: 113.2811, y: 32.301}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6106003238456501354
@@ -3810,7 +3810,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 81.79853, y: -29.166016}
+  m_AnchoredPosition: {x: 81.79853, y: -29.20697}
   m_SizeDelta: {x: 152.0365, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &891378307842243420
