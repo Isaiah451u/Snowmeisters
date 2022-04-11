@@ -915,6 +915,7 @@ GameObject:
   - component: {fileID: 8237247262531361346}
   - component: {fileID: 8237247262531361723}
   - component: {fileID: 991103817}
+  - component: {fileID: 991103805}
   m_Layer: 0
   m_Name: PlayerControllerNew
   m_TagString: Player
@@ -1378,6 +1379,22 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
+--- !u!114 &991103805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8237247262531361347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2fe5546f775c47d2820aa5e8a715f53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _data:
+    _json: '{"nest":{"source":"Macro","macro":0,"embed":null}}'
+    _objectReferences:
+    - {fileID: 11400000, guid: b227351233ab0a348bc6c2783504c422, type: 2}
 --- !u!1001 &8761361744558468246
 PrefabInstance:
   m_ObjectHideFlags: 0
