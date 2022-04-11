@@ -85,6 +85,8 @@ GameObject:
   m_Component:
   - component: {fileID: 485970630606550002}
   - component: {fileID: 8302332583026090553}
+  - component: {fileID: 4880745346409520973}
+  - component: {fileID: 1647250161224501077}
   m_Layer: 5
   m_Name: VolumeSlider
   m_TagString: Untagged
@@ -165,6 +167,36 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &4880745346409520973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 507108897936985758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e741851cba3ad425c91ecf922cc6b379, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _data:
+    _json: '{"declarations":{"collection":{"$content":[],"$version":"A"},"$version":"A"}}'
+    _objectReferences: []
+--- !u!114 &1647250161224501077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 507108897936985758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2fe5546f775c47d2820aa5e8a715f53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _data:
+    _json: '{"nest":{"source":"Embed","macro":null,"embed":{"variables":{"collection":{"$content":[],"$version":"A"},"$version":"A"},"controlInputDefinitions":[],"controlOutputDefinitions":[],"valueInputDefinitions":[],"valueOutputDefinitions":[],"title":null,"summary":null,"pan":{"x":41.5285,"y":271.0357},"zoom":1.0,"elements":[{"coroutine":false,"defaultValues":{},"position":{"x":-265.0,"y":-22.0},"guid":"2c95c3c2-d0d0-46f2-9e85-80c7c77b50e2","$version":"A","$type":"Unity.VisualScripting.Update","$id":"10"},{"kind":"Application","defaultValues":{"name":{"$content":"Volume","$type":"System.String"}},"position":{"x":-78.0,"y":-33.0},"guid":"3218a01e-ad20-4c70-b04d-902d6c27c97c","$version":"A","$type":"Unity.VisualScripting.SetVariable","$id":"12"},{"member":{"name":"value","parameterTypes":null,"targetType":"UnityEngine.UI.Slider","targetTypeName":"UnityEngine.UI.Slider","$version":"A"},"defaultValues":{"target":null},"position":{"x":-260.0,"y":82.0},"guid":"6171f354-5f7f-4f2c-b9e3-066c172347b4","$version":"A","$type":"Unity.VisualScripting.GetMember","$id":"14"},{"coroutine":false,"defaultValues":{},"position":{"x":-264.0,"y":219.0},"guid":"df49c593-cdde-4f49-a0a1-545b748e0348","$version":"A","$type":"Unity.VisualScripting.Start","$id":"17"},{"chainable":false,"member":{"name":"value","parameterTypes":null,"targetType":"UnityEngine.UI.Slider","targetTypeName":"UnityEngine.UI.Slider","$version":"A"},"defaultValues":{"target":null,"input":{"$content":0.0,"$type":"System.Single"}},"position":{"x":-96.0,"y":220.0},"guid":"17e55cf1-3be1-49da-a99e-5d53bc12a06e","$version":"A","$type":"Unity.VisualScripting.SetMember","$id":"19"},{"specifyFallback":false,"kind":"Application","defaultValues":{"name":{"$content":"Volume","$type":"System.String"}},"position":{"x":-271.0,"y":324.0},"guid":"03b62e17-1f3d-4fb1-a5aa-e63c83ead9ec","$version":"A","$type":"Unity.VisualScripting.GetVariable","$id":"22"},{"sourceUnit":{"$ref":"10"},"sourceKey":"trigger","destinationUnit":{"$ref":"12"},"destinationKey":"assign","guid":"9c11f363-adff-4746-b78a-a5eb0383c25e","$type":"Unity.VisualScripting.ControlConnection"},{"sourceUnit":{"$ref":"17"},"sourceKey":"trigger","destinationUnit":{"$ref":"19"},"destinationKey":"assign","guid":"efa31907-6e8c-4412-8f4c-56ce16c8b2c1","$type":"Unity.VisualScripting.ControlConnection"},{"sourceUnit":{"$ref":"14"},"sourceKey":"value","destinationUnit":{"$ref":"12"},"destinationKey":"input","guid":"6d84465e-1517-4660-99cb-2f01b9caf2fb","$type":"Unity.VisualScripting.ValueConnection"},{"sourceUnit":{"$ref":"22"},"sourceKey":"value","destinationUnit":{"$ref":"19"},"destinationKey":"input","guid":"fef02f59-37bf-40f9-91ad-1cdf17fcf9cd","$type":"Unity.VisualScripting.ValueConnection"}],"$version":"A"}}}'
+    _objectReferences: []
 --- !u!1 &1692330873748231393
 GameObject:
   m_ObjectHideFlags: 0
@@ -3183,6 +3215,7 @@ GameObject:
   - component: {fileID: 3703970080953650866}
   - component: {fileID: 2430019757677911721}
   - component: {fileID: 4452860646479699471}
+  - component: {fileID: 1765082791583188550}
   m_Layer: 5
   m_Name: PauseCanvas
   m_TagString: Untagged
@@ -3421,6 +3454,22 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1765082791583188550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6508701086536038305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2fe5546f775c47d2820aa5e8a715f53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _data:
+    _json: '{"nest":{"source":"Macro","macro":0,"embed":null}}'
+    _objectReferences:
+    - {fileID: 11400000, guid: b227351233ab0a348bc6c2783504c422, type: 2}
 --- !u!1 &7042605858012857989
 GameObject:
   m_ObjectHideFlags: 0
