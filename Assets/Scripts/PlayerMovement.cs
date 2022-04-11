@@ -139,14 +139,17 @@ public class PlayerMovement : MonoBehaviour
 
                 if (groundCheck)
                 {
+                    if(!isSwinging)
+                        audioSource.UnPause();
+
                     dustParticles.Play();
                 }
                 else
                 {
                     dustParticles.Stop();
+                    audioSource.Pause();
                 }
 
-                audioSource.UnPause();
                 var groundForce = speed * 2f;
                 rBody.AddForce(new Vector2((horizontalInput * groundForce - rBody.velocity.x) * groundForce, 0));
                 rBody.velocity = new Vector2(Mathf.Clamp(rBody.velocity.x, -10, 10), rBody.velocity.y);
