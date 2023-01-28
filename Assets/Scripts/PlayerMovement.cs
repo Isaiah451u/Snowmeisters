@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.VisualScripting;
+
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -11,21 +13,32 @@ public class PlayerMovement : MonoBehaviour
     public bool groundCheck;
     public bool isSwinging;
     public LayerMask groundLayer;
-    public Transform groundCheckObject;
-    private SpriteRenderer playerSprite;
-    public Rigidbody2D rBody;
+    
     private bool isJumping;
-    private Animator animator;
     private float jumpInput;
     private float horizontalInput;
     private bool candoubleJump;
 
+    public AudioClip walking;
+    public AudioClip jump;
+    private AudioSource audioSource;
+    public AudioSource gameManager;
 
+    private SpriteRenderer playerSprite;
+    public Transform groundCheckObject;
+    public Rigidbody2D rBody;
+    public Animator animator;
+    public SpriteRenderer climbingSprite;
+
+    public ParticleSystem dustParticles;
+    public GameObject jumpParticles;
+    public GameObject doubleJumpParticles;
     void Awake()
     {
         playerSprite = GetComponent<SpriteRenderer>();
         rBody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -56,37 +69,50 @@ public class PlayerMovement : MonoBehaviour
             {
                 if (groundCheck)
                 {
-                    rBody.velocity = Vector2.up * jumpSpeed;
+                    Instantiate(jumpParticles, gameObject.transform.position, gameObject.transform.rotation);
                     animator.SetBool("isJumping", true);
+                    rBody.velocity = Vector2.up * jumpSpeed;
+                    gameManager.PlayOneShot(jump);
                 }
                 else
                 {
                     if (candoubleJump)
                     {
-                        rBody.velocity = Vector2.up * jumpSpeed;
+                        Instantiate(jumpParticles, gameObject.transform.position + new Vector3(), gameObject.transform.rotation);
                         animator.SetBool("isJumping", true);
+                        rBody.velocity = Vector2.up * jumpSpeed;
+                        gameManager.PlayOneShot(jump);
                         candoubleJump = false;
                     }
                 }
             }
-            else
-            {
-                animator.SetBool("isJumping", false);
-            }
-
         }
     }
 
     void FixedUpdate()
     {
+        if (groundCheck)
+        {
+            animator.SetBool("ClimbAttatch", false);
+            animator.SetBool("isJumping", false);
+            animator.SetBool("ClimbingUp", false);
+            animator.SetBool("ClimbingDown", false);
+        }
+
         if (horizontalInput < 0f || horizontalInput > 0f)
         {
             animator.SetFloat("Speed", Mathf.Abs(horizontalInput));
-            playerSprite.flipX = horizontalInput < 0f;
+            if (horizontalInput < 0f)
+            {
+                gameObject.transform.localScale = new Vector3(-.234f, .234f, .234f);
+            }
+            else
+            {
+                gameObject.transform.localScale = new Vector3(.234f, .234f, .234f);
+            }
+
             if (isSwinging)
             {
-
-                // 1 - Get a normalized direction vector from the player to the hook point
                 var playerToHookDirection = (ropeHook - (Vector2)transform.position).normalized;
 
                 // 2 - Inverse the direction to get a perpendicular direction
@@ -109,21 +135,31 @@ public class PlayerMovement : MonoBehaviour
             }
             else
             {
-                if (horizontalInput < 0f || horizontalInput > 0f)
-                {
-                    playerSprite.flipX = horizontalInput < 0f;
+                Variables.Application.Set("CanClimb", true);
 
-                    var groundForce = speed * 2f;
-                    rBody.AddForce(new Vector2((horizontalInput * groundForce - rBody.velocity.x) * groundForce, 0));
-                    rBody.velocity = new Vector2(Mathf.Clamp(rBody.velocity.x, -10, 10), rBody.velocity.y);
+                if (groundCheck)
+                {
+                    if(!isSwinging)
+                        audioSource.UnPause();
+
+                    dustParticles.Play();
                 }
+                else
+                {
+                    dustParticles.Stop();
+                    audioSource.Pause();
+                }
+
+                var groundForce = speed * 2f;
+                rBody.AddForce(new Vector2((horizontalInput * groundForce - rBody.velocity.x) * groundForce, 0));
+                rBody.velocity = new Vector2(Mathf.Clamp(rBody.velocity.x, -10, 10), rBody.velocity.y);
             }
         }
         else
         {
+            dustParticles.Stop();
             animator.SetFloat("Speed", 0f);
+            audioSource.Pause(); 
         }
-
-       
     }
 }

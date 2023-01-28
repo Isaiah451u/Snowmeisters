@@ -7,6 +7,8 @@ using Unity.VisualScripting;
 
 public class RopeSystem : MonoBehaviour
 {
+    private Dictionary<Vector2, int> wrapPointsLookup = new Dictionary<Vector2, int>();
+
     public float climbSpeed = 3f;
 
     public GameObject ropeHingeAnchor;
@@ -22,7 +24,11 @@ public class RopeSystem : MonoBehaviour
     private List<Vector2> ropePositions = new List<Vector2>();
     private bool distanceSet;
 
-    public bool isClimbing;
+    public bool canSwing;
+
+    public AudioSource gameManager;
+    public AudioClip grapple;
+    public Transform grapplePoint;
 
     #region tristan visual variables :3
     private GameObject grappleTrigger;
@@ -30,6 +36,8 @@ public class RopeSystem : MonoBehaviour
     #endregion
     void Awake() //Sets the initial components
     {
+        //Variables.Saved.Set("Climbing", false);
+
         ropeJoint.enabled = false;
         playerPosition = transform.position;
         ropeHingeAnchorRb = ropeHingeAnchor.GetComponent<Rigidbody2D>();
@@ -40,7 +48,7 @@ public class RopeSystem : MonoBehaviour
 
     void Update()
     {
-        isClimbing = (bool)Variables.Saved.Get("Climbing");
+        canSwing = (bool)Variables.Application.Get("canSwing");
 
         var worldMousePosition =
             Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0f)); //Gets the mouse current position and saves it to a variable
@@ -62,12 +70,41 @@ public class RopeSystem : MonoBehaviour
         {
             playerMovement.isSwinging = true;
             playerMovement.ropeHook = ropePositions.Last();
+            if (ropePositions.Count > 0)
+            {
+                var lastRopePoint = ropePositions.Last();
+                var playerToCurrentNextHit = Physics2D.Raycast(playerPosition, (lastRopePoint - playerPosition).normalized, Vector2.Distance(playerPosition, lastRopePoint) - 0.1f, ropeLayerMask);
+
+                if (playerToCurrentNextHit)
+                {
+                    var colliderWithVertices = playerToCurrentNextHit.collider as PolygonCollider2D;
+                    if (colliderWithVertices != null)
+                    {
+                        var closestPointToHit = GetClosestColliderPointFromRaycastHit(playerToCurrentNextHit, colliderWithVertices);
+
+                        if (wrapPointsLookup.ContainsKey(closestPointToHit))
+                        {
+                            ResetRope();
+                            return;
+                        }
+
+                        ropePositions.Add(closestPointToHit);
+                        wrapPointsLookup.Add(closestPointToHit, 0);
+                        distanceSet = false;
+                    }
+                }
+            }
         }
 
         HandleInput(aimDirection);
         UpdateRopePositions();
         HandleRopeLength();
         HandleGrappleVisuals();
+
+        if ((bool)Variables.Application.Get("isDead"))
+        {
+            ResetRope();
+        }
 
     }
 
@@ -79,11 +116,11 @@ public class RopeSystem : MonoBehaviour
         if (Input.GetMouseButton(0)) //Checks if the left mouse button was pressed
         {
 
-            if (isClimbing == true)
+           if (canSwing == false)
                 return;
-            if (playerMovement.rBody.velocity.x >= 0.05f)
+            if (playerMovement.groundCheck)
                 return;
-
+ 
             if (ropeAttached) return; //if the rope is already attatched, break out of the code
             ropeRenderer.enabled = true;
 
@@ -91,6 +128,10 @@ public class RopeSystem : MonoBehaviour
 
             if (hit.collider != null) //If the collider hits
             {
+                Variables.Application.Set("canClimb", false);
+                playerMovement.animator.SetBool("isSwinging", true);
+
+                gameManager.PlayOneShot(grapple);
                 ropeAttached = true;
                 if (!ropePositions.Contains(hit.point))
                 {
@@ -111,7 +152,12 @@ public class RopeSystem : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButton(1)) //reset if space
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButton(1)) //reset if space or right/left click
+        {
+            ResetRope();
+        }
+
+        if (playerMovement.groundCheck)
         {
             ResetRope();
         }
@@ -119,6 +165,7 @@ public class RopeSystem : MonoBehaviour
 
     private void ResetRope() //reset method for the grapple
     {
+        playerMovement.animator.SetBool("isSwinging", false);
         ropeJoint.enabled = false;
         ropeAttached = false;
         playerMovement.isSwinging = false;
@@ -127,6 +174,9 @@ public class RopeSystem : MonoBehaviour
         ropeRenderer.SetPosition(1, transform.position);
         ropePositions.Clear();
         ropeHingeAnchorSprite.enabled = false;
+        wrapPointsLookup.Clear();
+        Variables.Application.Set("isDead", false);
+        Variables.Application.Set("canClimb", true);
     }
 
     private void UpdateRopePositions()
@@ -179,7 +229,7 @@ public class RopeSystem : MonoBehaviour
             }
             else
             {
-                ropeRenderer.SetPosition(i, transform.position);
+                ropeRenderer.SetPosition(i, grapplePoint.position);
             }
         }
     }
@@ -207,5 +257,15 @@ public class RopeSystem : MonoBehaviour
         {
             grappleTrigger.SetActive(false);
         }
+    }
+
+    private Vector2 GetClosestColliderPointFromRaycastHit(RaycastHit2D hit, PolygonCollider2D polyCollider)
+    {
+        var distanceDictionary = polyCollider.points.ToDictionary<Vector2, float, Vector2>(
+            position => Vector2.Distance(hit.point, polyCollider.transform.TransformPoint(position)),
+            position => polyCollider.transform.TransformPoint(position));
+
+        var orderedDictionary = distanceDictionary.OrderBy(e => e.Key);
+        return orderedDictionary.Any() ? orderedDictionary.First().Value : Vector2.zero;
     }
 }
